@@ -48,7 +48,7 @@
 .navbar-brand {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--jaune-vif);
+  color: var( --blanc);
   letter-spacing: 2px;
   white-space: nowrap;
 }
