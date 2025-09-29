@@ -44,7 +44,7 @@ const Header: React.FC = () => {
         <div className={`navbar-content ${isMenuOpen ? "open" : ""}`}>
           <nav className="navbar-links">
             <Link to="/" onClick={closeMenu}>Accueil</Link>
-            <Link to="/facultes" onClick={closeMenu}>Facultés</Link>
+            <Link to="/faculte" onClick={closeMenu}>Facultés</Link>
             <Link to="/admissions" onClick={closeMenu}>Admissions</Link>
             <Link to="/recherche" onClick={closeMenu}>Recherche</Link>
             <Link to="/hebergement" onClick={closeMenu}>Hébergement</Link>
