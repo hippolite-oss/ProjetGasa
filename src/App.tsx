@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
@@ -8,10 +9,17 @@ import Recherche from './pages/Recherche/Recherche';
 import Hebergement from './pages/Hebergement/Hebergement';
 import Informations from './pages/Informations/Informations';
 
+=======
+import { Routes } from 'react-router-dom';
+
+import './App.css'
+import Header from './components/header/Header';
+>>>>>>> 5a63da8c71cd879df5a211f68839ce2421e391a1
 
 function App() {
   return (
     <div className='App'>
+<<<<<<< HEAD
       <Header />
       <Routes>
         <Route path="/" element={<Accueil />} />
@@ -26,3 +34,14 @@ function App() {
 }
 
 export default App;
+=======
+      <Header/>
+      <Routes>
+        
+      </Routes>
+    </div>
+  )
+}
+
+export default App;
+>>>>>>> 5a63da8c71cd879df5a211f68839ce2421e391a1
