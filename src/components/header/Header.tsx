@@ -1,15 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "/src/assets/images/logo.png";
-import './Header.css';
+import "./Header.css";
+
+const translations: Record<string, Record<string, string>> = {
+  fr: {
+    home: "ACCUEIL",
+    faculties: "FACULTÉS",
+    about: "À PROPOS",
+    equipement: "ÉQUIPEMENTS",
+    contact: "CONTACT",
+  },
+  en: {
+    home: "HOME",
+    faculties: "FACULTIES",
+    about: "ABOUT",
+    equipement: "EQUIPMENT",
+    contact: "CONTACT",
+  },
+};
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [language, setLanguage] = useState<"fr" | "en">("fr");
 
   useEffect(() => {
-    // Pour effet sticky, ombre/fond si scrollY > 10
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -23,6 +40,10 @@ const Header: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "fr" ? "en" : "fr"));
+  };
+
   return (
     <>
       <header className={`navbar ${isScrolled ? "scrolled" : ""}`}>
@@ -31,6 +52,7 @@ const Header: React.FC = () => {
           <img src={logo} alt="Logo UATM-GASA" />
           <span className="navbar-brand">UATM-GASA</span>
         </div>
+
         {/* Hamburger */}
         <button
           className={`hamburger ${isMenuOpen ? "open" : ""}`}
@@ -40,24 +62,36 @@ const Header: React.FC = () => {
         >
           <span></span><span></span><span></span>
         </button>
+
         {/* Menu */}
         <div className={`navbar-content ${isMenuOpen ? "open" : ""}`}>
           <nav className="navbar-links">
-            <Link to="/" onClick={closeMenu}>Accueil</Link>
-            <Link to="/faculte" onClick={closeMenu}>Facultés</Link>
-            <Link to="/admissions" onClick={closeMenu}>Admissions</Link>
-            <Link to="/recherche" onClick={closeMenu}>Recherche</Link>
-            <Link to="/hebergement" onClick={closeMenu}>Hébergement</Link>
-            <Link to="/informations" onClick={closeMenu}>Informations</Link>
+            <Link to="/" onClick={closeMenu}>{translations[language].home}</Link>
+            <Link to="/faculties" onClick={closeMenu}>{translations[language].faculties}</Link>
+            <Link to="/About" onClick={closeMenu}>{translations[language].about}</Link>
+            <Link to="/Equipement" onClick={closeMenu}>{translations[language].equipement}</Link>
+            <Link to="/Contact" onClick={closeMenu}>{translations[language].contact}</Link>
           </nav>
         </div>
-        {/* Dark/Light Button */}
-        <button onClick={toggleTheme} className="theme-toggle" aria-label="Mode sombre">
-          {isDarkMode ? "☀️" : "🌙"}
-        </button>
+
+        {/* Buttons */}
+        <div className="navbar-actions">
+          <button onClick={toggleTheme} className="theme-toggle" aria-label="Mode sombre">
+            {isDarkMode ? "☀️" : "🌙"}
+          </button>
+
+          {/* Sélecteur de langue */}
+          <button onClick={toggleLanguage} className="lang-toggle" aria-label="Changer la langue">
+            {language === "fr" ? "FR" : "EN"}
+          </button>
+        </div>
       </header>
+
       {/* Overlay */}
-      <div className={`navbar-overlay ${isMenuOpen ? "open" : ""}`} onClick={closeMenu}></div>
+      <div
+        className={`navbar-overlay ${isMenuOpen ? "open" : ""}`}
+        onClick={closeMenu}
+      ></div>
     </>
   );
 };
